@@ -1,0 +1,24 @@
+services:
+  vidvault:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: videovault:1.3
+    container_name: vidvault-prod
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      # This maps your .env names to your App names
+      - DATABASE_URL=${DB_URL}
+      - SESSION_SECRET=${SECRET}
+      - ORIGIN=http://localhost:5000
+      - RP_ID=localhost
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    restart: no 
+    # user: "node"  <-- Comment this out for now

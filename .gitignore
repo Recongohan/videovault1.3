@@ -1,8 +1,28 @@
-node_modules
-dist
-.DS_Store
-server/public
-vite.config.ts.*
-*.tar.gz
+# --- Dependencies ---
+node_modules/
+jspm_packages/
+.npm
+.eslintcache
+
+# --- Build Outputs ---
+dist/
+build/
+.vite/
+# Keep public files UNLESS they are generated during build
+server/public/
+
+# --- Environment & Secrets (CRITICAL) ---
 .env
 .env.*
+!.env.example
+
+# --- Docker ---
+# We WANT to commit Dockerfile and docker-compose.yml
+# But we usually ignore local data volumes if you created any
+*.tar.gz
+
+# --- OS & IDE ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
