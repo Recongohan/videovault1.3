@@ -10,7 +10,6 @@ services:
     env_file:
       - .env
     environment:
-      # This maps your .env names to your App names
       - DATABASE_URL=${DB_URL}
       - SESSION_SECRET=${SECRET}
       - ORIGIN=http://localhost:5000
@@ -20,5 +19,9 @@ services:
         limits:
           cpus: '0.5'
           memory: 512M
-    restart: no 
-    # user: "node"  <-- Comment this out for now
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: no
